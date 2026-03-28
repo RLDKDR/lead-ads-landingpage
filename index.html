@@ -163,13 +163,15 @@
         .header-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
             color: var(--white);
-            font-family: var(--font-h);
+            font-family: var(--font-b);
             font-weight: 700;
             font-size: 18px;
+            letter-spacing: 0;
+            word-spacing: 0;
             transition: color 0.35s;
         }
+        .header-logo .dot { color: var(--blue); }
         .header-logo svg {
             width: 36px;
             height: 36px;
@@ -269,6 +271,7 @@
             text-decoration: none;
             position: relative;
             display: inline;
+            z-index: 0;
         }
         .hero-headline h1 .underline-text::after {
             content: '';
@@ -284,10 +287,10 @@
         .hero-subtitle {
             text-align: center;
             color: rgba(255,255,255,0.85);
-            font-size: 19px;
+            font-size: 22px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 4px 24px rgba(0,0,0,0.3);
             margin-bottom: 24px;
-            font-family: var(--font-b);
+            font-family: var(--font-h);
         }
         .hero-content {
             display: grid;
@@ -323,17 +326,18 @@
             align-items: flex-start;
         }
         .hero-check-icon {
-            width: 22px;
-            height: 22px;
-            min-width: 22px;
+            width: 26px;
+            height: 26px;
+            min-width: 26px;
             background: var(--blue);
-            border-radius: 50%;
+            clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 2px;
         }
-        .hero-check-icon svg { width: 12px; height: 12px; }
+        .hero-check-icon svg { width: 13px; height: 13px; }
+        .hero-check-icon svg path { stroke: white; }
         .hero-check span {
             color: rgba(255,255,255,0.9);
             font-size: 16px;
@@ -1197,7 +1201,6 @@
             .mobile-toggle { display: flex; }
             .mobile-nav-overlay { display: flex; }
             .hero-content { grid-template-columns: 1fr; }
-            .hero-right { display: none; }
             .problem-grid { grid-template-columns: 1fr; }
             .bento-grid { grid-template-columns: 1fr; }
             .bento-tall { grid-row: auto; }
@@ -1210,9 +1213,120 @@
 
         @media (max-width: 768px) {
             .container { padding: 0 20px; }
-            .hero .container { padding-top: 90px; padding-bottom: 40px; }
-            .hero-headline h1 { font-size: 26px; }
-            .hero-subtitle { font-size: 15px; }
+
+            /* Mobile Hero: Bild oben, weißer Fade, dunkler Text */
+            .hero {
+                background: var(--white);
+            }
+            .hero-bg {
+                position: relative;
+                height: 50vh;
+                border-radius: 0;
+            }
+            .hero-bg::before {
+                background: rgba(10, 14, 26, 0.3);
+            }
+            .hero-bg::after {
+                height: 60%;
+                background: linear-gradient(180deg, transparent 0%, var(--white) 100%);
+            }
+            .hero .container {
+                position: static;
+                padding-top: 0;
+                padding-bottom: 24px;
+                overflow: visible;
+                z-index: auto;
+                margin-top: -60px;
+            }
+            .hero-headline {
+                position: relative;
+                z-index: 3;
+            }
+            .hero-headline h1 {
+                font-size: 28px;
+                color: var(--dark);
+                text-shadow: none;
+            }
+            .hero-headline h1 .underline-text::after {
+                background: linear-gradient(90deg, rgba(0,77,245,0.3) 0%, rgba(0,77,245,0.12) 100%);
+                height: 12px;
+                bottom: 2px;
+            }
+            .hero-subtitle {
+                font-size: 17px;
+                color: #555;
+                text-shadow: none;
+                position: relative;
+                z-index: 3;
+                margin-bottom: 12px;
+            }
+            .hero-left {
+                padding-bottom: 0;
+                padding-left: 0;
+                text-shadow: none;
+                position: relative;
+                z-index: 3;
+                display: flex;
+                flex-direction: column;
+            }
+            .hero-body-text {
+                order: 0;
+            }
+            .hero-cta-btn {
+                order: 1;
+                margin-bottom: 24px;
+                align-self: flex-start;
+            }
+            .hero-checks {
+                order: 2;
+            }
+            .hero-body-text {
+                color: #333;
+                margin-bottom: 12px;
+                font-size: 15px;
+            }
+            .hero-checks {
+                margin-bottom: 20px;
+            }
+            .hero-check {
+                margin-bottom: 0;
+            }
+            .hero-body-text strong {
+                color: var(--dark);
+            }
+            .hero-check span {
+                color: #444;
+            }
+            .hero-check span strong {
+                color: var(--dark);
+            }
+            .hero-check-icon {
+                background: #EDF2FF;
+            }
+            .hero-check-icon svg path {
+                stroke: var(--blue);
+            }
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+            .hero-right {
+                display: block;
+                position: absolute;
+                top: 4vh;
+                left: 50%;
+                transform: translateX(-50%);
+                height: 46vh;
+                width: auto;
+                z-index: 0;
+            }
+            .hero-right img {
+                height: 100%;
+                width: auto;
+                max-width: none;
+            }
+            .hero-bg::after {
+                z-index: 1;
+            }
             .problem-section,
             .benefits-section,
             .services-section,
@@ -1248,11 +1362,7 @@
     <header class="header" id="header">
         <div class="container">
             <a href="#" class="header-logo">
-                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 8C8 8 16 8 20 14C24 20 20 28 14 28C8 28 8 22 12 18C16 14 24 14 28 20C32 26 28 34 22 34C16 34 14 28 18 24" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    <path d="M12 6C12 6 20 6 24 12C28 18 24 26 18 26C12 26 12 20 16 16C20 12 28 12 32 18" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.5"/>
-                </svg>
-                Kudor Digital
+anfrageseite<span class="dot">.</span>io
             </a>
             <nav class="header-nav">
                 <a href="#hero">Startseite</a>
@@ -1290,19 +1400,19 @@
             <p class="hero-subtitle">… und endlich auch <strong>online</strong> Kunden gewinnst, nicht nur über drei Ecken und Empfehlungen.</p>
             <div class="hero-content">
                 <div class="hero-left">
-                    <p class="hero-body-text"><strong>Mach es dir einfach:</strong> Erhalte eine Website, die dich als Top-Experte zeigt, mehr Kundenanfragen generiert und deine Konkurrenz im Schatten stehen lässt.</p>
+                    <p class="hero-body-text"><strong>Mach es dir einfach:</strong> Erhalte eine Website, die dich als Top-Experte zeigt, mehr Kundenanfragen generiert und dich sofort von der Konkurrenz abhebt.</p>
                     <div class="hero-checks">
                         <div class="hero-check">
                             <div class="hero-check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                            <span><strong>Mehr Kundenanfragen:</strong> Deine neue Website verwandelt Besucher in Leute, die bei dir kaufen wollen.</span>
+                            <span><strong>Erhalte mehr Kundenfragen:</strong> Deine Website verwandelt Besucher in zahlende Kunden.</span>
                         </div>
                         <div class="hero-check">
                             <div class="hero-check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                            <span><strong>Erste Wahl in deiner Branche:</strong> Dein neuer Online-Auftritt positioniert dich als der Experte, an den man in deiner Region zuerst denkt.</span>
+                            <span><strong>Werde zur ersten Wahl:</strong> Dein neuer Online-Auftritt positioniert dich als Experte #1 in deiner Branche.</span>
                         </div>
                         <div class="hero-check">
                             <div class="hero-check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                            <span><strong>Persönlich aus der Region:</strong> Ich sitze hier vor Ort, kenne deinen Markt und bin jederzeit für dich erreichbar.</span>
+                            <span><strong>Echte Kundennähe:</strong> Als lokaler Partner vor Ort verstehe ich deinen Markt und bin persönlich für dich da.</span>
                         </div>
                     </div>
                     <a href="eintrageformular.html" class="hero-cta-btn">Jetzt kurzes Erstgespräch sichern</a>
@@ -1659,11 +1769,7 @@
             <div class="footer-grid">
                 <div class="footer-col-brand">
                     <div class="footer-logo">
-                        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 8C8 8 16 8 20 14C24 20 20 28 14 28C8 28 8 22 12 18C16 14 24 14 28 20C32 26 28 34 22 34C16 34 14 28 18 24" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                            <path d="M12 6C12 6 20 6 24 12C28 18 24 26 18 26C12 26 12 20 16 16C20 12 28 12 32 18" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" opacity="0.5"/>
-                        </svg>
-                        <span>Kudor Digital</span>
+                        <span style="letter-spacing:0">anfrageseite<span class="dot">.</span>io</span>
                     </div>
                     <div class="footer-socials">
                         <a href="#" aria-label="Instagram">
