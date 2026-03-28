@@ -68,7 +68,7 @@
             --gray: #8E8E93;
             --green: #34C759;
             --radius-card: 16px;
-            --radius-btn: 100px;
+            --radius-btn: 10px;
             --shadow-card: 0px 4px 32px rgba(17,17,26,0.05), 0px 8px 48px rgba(17,17,26,0.05);
         }
 
@@ -95,7 +95,7 @@
             color: var(--gray);
             padding: 6px 16px;
             border: 1px solid #D1D1D6;
-            border-radius: var(--radius-btn);
+            border-radius: 6px;
             margin-bottom: 20px;
         }
 
@@ -104,8 +104,8 @@
             align-items: center;
             justify-content: center;
             height: 48px;
-            padding: 6px 24px;
-            background: var(--blue);
+            padding: 6px 28px;
+            background: linear-gradient(135deg, #0052FF 0%, #003ECF 100%);
             color: var(--white);
             font-family: var(--font-h);
             font-size: 14px;
@@ -113,6 +113,21 @@
             border-radius: var(--radius-btn);
             transition: transform 0.2s, box-shadow 0.2s;
             white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-primary:hover::before {
+            left: 120%;
         }
         .btn-primary:hover {
             transform: translateY(-1px);
@@ -306,7 +321,7 @@
             width: 22px;
             height: 22px;
             min-width: 22px;
-            background: var(--green);
+            background: var(--blue);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -326,20 +341,34 @@
         .hero-cta-btn {
             display: inline-flex;
             align-items: center;
-            height: 48px;
-            padding: 6px 28px;
-            background: rgba(52,199,89,0.12);
-            border: 1.5px solid rgba(52,199,89,0.5);
-            color: var(--green);
+            height: 52px;
+            padding: 6px 32px;
+            background: linear-gradient(135deg, #0052FF 0%, #003ECF 100%);
+            color: var(--white);
             font-family: var(--font-h);
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             border-radius: var(--radius-btn);
-            transition: background 0.2s, transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+        .hero-cta-btn:hover::before {
+            left: 120%;
         }
         .hero-cta-btn:hover {
-            background: rgba(52,199,89,0.2);
             transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(var(--blue-rgb), 0.4);
         }
         .hero-right {
             display: flex;
@@ -514,13 +543,80 @@
             font-size: 15px;
         }
 
-        /* 3-column bento row 1: cards | text | image placeholder */
+        /* Bento Grid */
+        .bento-card {
+            background: var(--light);
+            border-radius: var(--radius-card);
+            padding: 28px;
+        }
+        .bento-card--notifications {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .bento-card--text h3 {
+            font-size: clamp(22px, 2.5vw, 28px);
+            margin-bottom: 16px;
+            line-height: 1.25;
+        }
+        .bento-card--text p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .bento-card--phone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            padding: 24px 16px;
+        }
+        .phone-placeholder {
+            width: 200px;
+        }
+        .phone-frame {
+            background: #222;
+            border-radius: 28px;
+            padding: 12px 8px;
+            position: relative;
+        }
+        .phone-notch {
+            width: 80px;
+            height: 6px;
+            background: #333;
+            border-radius: 4px;
+            margin: 0 auto 8px;
+        }
+        .phone-screen-placeholder {
+            background: #E8EAED;
+            border-radius: 18px;
+            aspect-ratio: 9/16;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .bento-card--wide {
+            padding: 28px;
+        }
+        .bento-card--wide h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        .bento-card--wide p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.65;
+        }
+
         .benefits-row1 {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 32px;
-            align-items: start;
-            margin-bottom: 40px;
+            gap: 20px;
+            align-items: stretch;
+            margin-bottom: 20px;
         }
         .notification-cards {
             display: flex;
@@ -559,39 +655,17 @@
         .notification-card-meta { font-size: 13px; color: var(--gray); }
         .notification-card-meta a { color: var(--blue); font-weight: 600; }
 
-        .benefits-text-block h3 {
-            font-size: clamp(22px, 2.5vw, 28px);
-            margin-bottom: 16px;
-            line-height: 1.25;
-        }
-        .benefits-text-block p {
-            color: #555;
-            font-size: 15px;
-            line-height: 1.7;
-        }
         /* Simple gray placeholder for any image */
         .img-ph {
             background: #E8EAED;
             border-radius: 12px;
         }
 
-        /* 2-column row 2: two benefit blocks, each with placeholder image + text */
         .benefits-row2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 20px;
             margin-bottom: 48px;
-        }
-        .benefit-block {}
-        .benefit-block .img-ph { margin-bottom: 20px; }
-        .benefit-block h3 {
-            font-size: 22px;
-            margin-bottom: 12px;
-        }
-        .benefit-block p {
-            color: #555;
-            font-size: 15px;
-            line-height: 1.65;
         }
         .benefits-cta {
             text-align: center;
@@ -615,7 +689,6 @@
         .services-sidebar h2 {
             font-size: clamp(28px, 3.2vw, 40px);
             margin-bottom: 20px;
-            font-style: italic;
         }
         .services-sidebar p {
             color: #555;
@@ -675,7 +748,7 @@
             width: 20px;
             height: 20px;
             min-width: 20px;
-            background: var(--green);
+            background: var(--blue);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -726,7 +799,6 @@
             color: #444;
             font-size: 15px;
             line-height: 1.7;
-            font-style: italic;
         }
         .testimonial-author {
             display: flex;
@@ -859,33 +931,39 @@
             position: relative;
             padding: 96px 0;
             overflow: hidden;
-            background: #0a0e1a;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
         }
         .about-bg {
             position: absolute;
             inset: 0;
-            background:
-                radial-gradient(ellipse 100% 80% at 50% 30%, rgba(80,120,180,0.12) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 50% at 20% 60%, rgba(100,140,180,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse 70% 60% at 80% 40%, rgba(60,100,150,0.06) 0%, transparent 50%),
-                linear-gradient(180deg, #0d1220 0%, #141e32 40%, #1a2840 60%, #0d1220 100%);
+            background: #E8EAED;
         }
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 56px;
-            align-items: center;
+        .about-bg::after {
+            content: 'Hintergrundbild (z.B. Stadt-Panorama)';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 20px;
+            color: #999;
+            font-size: 14px;
+        }
+        .about-overlay {
             position: relative;
             z-index: 2;
-        }
-        .about-photo {
-            aspect-ratio: 3/4;
-            border-radius: 12px;
-            background: rgba(255,255,255,0.03);
+            max-width: 720px;
+            margin: 0 auto;
+            background: rgba(10, 14, 26, 0.88);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-card);
+            padding: 48px 40px;
         }
         .about-content .tag {
             background: transparent;
-            border-color: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.25);
             color: rgba(255,255,255,0.6);
         }
         .about-content h2 {
@@ -922,7 +1000,7 @@
             margin-bottom: 48px;
         }
         .step-card {
-            background: var(--dark);
+            background: linear-gradient(145deg, #0044CC 0%, #003AB8 100%);
             border-radius: var(--radius-card);
             padding: 32px;
         }
@@ -932,7 +1010,7 @@
             font-weight: 800;
             line-height: 1;
             margin-bottom: 20px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.06) 100%);
+            background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.08) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1017,36 +1095,46 @@
 
         /* ─── FINAL CTA ─── */
         .final-cta-section {
+            padding: 48px 0 96px;
+            background: var(--white);
+        }
+        .final-cta-card {
             position: relative;
-            padding: 96px 0;
             overflow: hidden;
-            background: #0e1220;
+            border-radius: 20px;
+            padding: 80px 40px;
+            background: #E8EAED;
         }
         .final-cta-bg {
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(ellipse 80% 60% at 50% 50%, rgba(60,80,120,0.15) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 40% at 30% 70%, rgba(40,60,100,0.10) 0%, transparent 50%),
-                radial-gradient(ellipse 50% 40% at 70% 30%, rgba(40,60,100,0.08) 0%, transparent 50%),
-                linear-gradient(180deg, #10162a 0%, #141e30 50%, #0e1220 100%);
-            opacity: 0.9;
+                linear-gradient(135deg, rgba(10,14,26,0.7) 0%, rgba(10,14,26,0.5) 100%);
+            z-index: 1;
+        }
+        .final-cta-bg::after {
+            content: 'Hintergrundbild';
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            color: rgba(255,255,255,0.3);
+            font-size: 12px;
+            z-index: 0;
         }
         .final-cta-content {
             position: relative;
             z-index: 2;
             text-align: center;
-            max-width: 680px;
+            max-width: 600px;
             margin: 0 auto;
         }
         .final-cta-content h2 {
             font-size: clamp(24px, 2.8vw, 34px);
             color: var(--white);
-            font-style: italic;
             margin-bottom: 16px;
         }
         .final-cta-content p {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
             font-size: 15px;
             margin-bottom: 28px;
         }
@@ -1168,12 +1256,10 @@
             .hero-right { display: none; }
             .problem-grid { grid-template-columns: 1fr; }
             .benefits-row1 { grid-template-columns: 1fr 1fr; }
-            .benefits-row1 .img-ph { display: none; }
+            .bento-card--phone { display: none; }
             .services-grid { grid-template-columns: 1fr; }
             .services-sidebar { position: static; margin-bottom: 32px; }
-            .testimonials-grid { grid-template-columns: 1fr; }
-            .about-grid { grid-template-columns: 1fr; }
-            .about-photo { max-width: 400px; aspect-ratio: 1; }
+            .about-overlay { margin: 0 20px; padding: 36px 24px; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
@@ -1333,46 +1419,56 @@
                 <h2>Webdesign aus der Region, für die Region.</h2>
                 <p>Ich komme aus Aalen, ich kenne die Betriebe hier und ich baue dir eine Website, die nicht nur schön anzusehen ist, sondern dafür sorgt, dass bei dir das Telefon häufiger klingelt.</p>
             </div>
-            <!-- Row 1: 3 columns — cards | text | image placeholder -->
+            <!-- Bento Grid Row 1: 3 columns -->
             <div class="benefits-row1 reveal">
-                <div class="notification-cards">
-                    <div class="notification-card">
-                        <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 4-10 8L2 4"/></svg></div>
-                        <div>
-                            <div class="notification-card-title">Website modernisieren</div>
-                            <div class="notification-card-meta">02.01.2026 - <a href="#">neue Anfrage</a></div>
+                <div class="bento-card bento-card--notifications">
+                    <div class="notification-cards">
+                        <div class="notification-card">
+                            <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 4-10 8L2 4"/></svg></div>
+                            <div>
+                                <div class="notification-card-title">Website modernisieren</div>
+                                <div class="notification-card-meta">02.01.2026 - <a href="#">neue Anfrage</a></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="notification-card">
-                        <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 4-10 8L2 4"/></svg></div>
-                        <div>
-                            <div class="notification-card-title">Professioneller Webauftritt</div>
-                            <div class="notification-card-meta">02.01.2026 - <a href="#">neue Anfrage</a></div>
+                        <div class="notification-card">
+                            <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 4-10 8L2 4"/></svg></div>
+                            <div>
+                                <div class="notification-card-title">Professioneller Webauftritt</div>
+                                <div class="notification-card-meta">02.01.2026 - <a href="#">neue Anfrage</a></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="notification-card">
-                        <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 4-10 8L2 4"/></svg></div>
-                        <div>
-                            <div class="notification-card-title">Mehr Kundenanfragen</div>
-                            <div class="notification-card-meta">02.01.2026 - <a href="#">neue Anfrage</a></div>
+                        <div class="notification-card">
+                            <div class="notif-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 4-10 8L2 4"/></svg></div>
+                            <div>
+                                <div class="notification-card-title">Mehr Kundenanfragen</div>
+                                <div class="notification-card-meta">02.01.2026 - <a href="#">neue Anfrage</a></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="benefits-text-block">
+                <div class="bento-card bento-card--text">
                     <h3>Die passenden Mitarbeiter für dein Team</h3>
                     <p>In Zeiten, in denen jeder über Fachkräftemangel klagt, vergessen die meisten, dass gute Bewerber sich ihren Arbeitgeber aussuchen. Die schauen sich deine Website an und entscheiden in Sekunden, ob du ein Betrieb bist, in dem sie gerne arbeiten wollen. Dein Online-Auftritt ist das Vorstellungsgespräch, das du nicht mitbekommst.</p>
                 </div>
-                <div class="img-ph" style="aspect-ratio:9/16;max-width:280px;margin-left:auto;border-radius:24px;"></div>
+                <div class="bento-card bento-card--phone">
+                    <div class="phone-placeholder">
+                        <div class="phone-frame">
+                            <div class="phone-notch"></div>
+                            <div class="phone-screen-placeholder">Bild</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Row 2: 2 columns — each with image placeholder + text -->
+            <!-- Bento Grid Row 2: 2 columns -->
             <div class="benefits-row2 reveal">
-                <div class="benefit-block">
+                <div class="bento-card bento-card--wide">
+                    <div class="img-ph" style="aspect-ratio:16/9;margin-bottom:20px;"></div>
                     <h3>Mehr qualifizierte Kundenanfragen</h3>
                     <p>Im Moment lebt dein Geschäft wahrscheinlich von Empfehlungen und Mundpropaganda. Das funktioniert, aber es hat eine Obergrenze. Deine neue Website holt dir die Leute, die dich noch nicht kennen, aber genau das suchen, was du anbietest. Und zwar vorqualifiziert, weil sie auf deiner Seite schon verstanden haben, was du machst und ob sie zu dir passen.</p>
                 </div>
-                <div class="benefit-block">
-                    <div class="img-ph" style="aspect-ratio:16/10;margin-bottom:20px;"></div>
+                <div class="bento-card bento-card--wide">
+                    <div class="img-ph" style="aspect-ratio:16/9;margin-bottom:20px;"></div>
                     <h3>Die Nummer 1 im Raum Aalen werden</h3>
                     <p>Es gibt in jeder Branche diesen einen Betrieb, den alle kennen. Nicht weil er der größte ist, sondern weil er überall auftaucht und überall professionell wirkt. Genau das baue ich dir auf. Einen Auftritt, der dafür sorgt, dass Leute im Raum Aalen an dich denken, wenn sie an dein Thema denken.</p>
                 </div>
@@ -1519,11 +1615,10 @@
     <section class="about-section" id="ueber-uns">
         <div class="about-bg"></div>
         <div class="container">
-            <div class="about-grid">
-                <div class="about-photo reveal"></div>
-                <div class="about-content reveal">
+            <div class="about-overlay reveal">
+                <div class="about-content">
                     <span class="tag">FÜR AALEN UND REGION</span>
-                    <h2>Ich bin Roland. Ich baue Websites für Leute, die besseres zu tun haben 😉</h2>
+                    <h2>Ich bin Roland. Ich baue Websites für Leute, die besseres zu tun haben.</h2>
                     <p>Ich wohne hier in der Region und ich baue Websites für Unternehmer, die richtig gut sind in dem, was sie tun, aber deren Online-Auftritt das leider (noch) nicht zeigt.</p>
                     <p>Die meisten meiner Kunden haben das Thema Website jahrelang vor sich hergeschoben. Weil das Tagesgeschäft immer wichtiger war, weil keiner Lust hat, sich mit Technik rumzuschlagen, und weil man halt irgendwie auch so über die Runden kommt…</p>
                     <p>Bis du realisierst, dass deine Website seit Jahren das Erste ist, was Leute von dir sehen, und gleichzeitig das Schlechteste.</p>
@@ -1632,12 +1727,14 @@
 
     <!-- FINAL CTA -->
     <section class="final-cta-section">
-        <div class="final-cta-bg"></div>
         <div class="container">
-            <div class="final-cta-content reveal">
+            <div class="final-cta-card">
+                <div class="final-cta-bg"></div>
+                <div class="final-cta-content reveal">
                 <h2>Du willst online so wahrgenommen werden, wie dich deine besten Kunden bereits kennen?</h2>
                 <p>Dann klick jetzt auf den Button und sichere dir dein kostenloses Erstgespräch mit mir.</p>
                 <a href="eintrageformular.html" class="btn-primary">Jetzt kostenloses Erstgespräch sichern</a>
+                </div>
             </div>
         </div>
     </section>
