@@ -49,7 +49,7 @@
             font-display: swap;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
         body { font-family: 'Liberation Sans', sans-serif; font-weight: 400; font-size: 16px; line-height: 1.5; color: #1C1C1E; background: #fff; overflow-x: hidden; }
         img { max-width: 100%; display: block; }
         a { text-decoration: none; color: inherit; }
@@ -143,6 +143,46 @@
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* ─── INTRO ANIMATIONS ─── */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(1.08); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes heroImgIn {
+            from { opacity: 0; transform: scale(1.12); }
+            to { opacity: 1; transform: scale(1.04); }
+        }
+        @keyframes heroBgZoom {
+            from { transform: scale(1.06); }
+            to { transform: scale(1); }
+        }
+        .header {
+            animation: fadeDown 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+        }
+        .hero-bg {
+            animation: heroBgZoom 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        .hero-headline {
+            animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+        }
+        .hero-subtitle {
+            animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+        }
+        .hero-left {
+            animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+        }
+        .hero-right {
+            animation: heroImgIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
         }
 
         /* ─── HEADER ─── */
@@ -283,6 +323,9 @@
             display: inline;
             z-index: 0;
         }
+        .hero-headline .underline-text {
+            text-shadow: 0 0 18px rgba(0,77,245,0.15), 0 0 36px rgba(0,77,245,0.08);
+        }
         .underline-text::after {
             content: '';
             position: absolute;
@@ -316,8 +359,10 @@
         }
         .hero-left {
             text-shadow: 0 1px 6px rgba(0,0,0,0.4), 0 2px 16px rgba(0,0,0,0.2);
-            padding-bottom: 158px;
-            padding-left: 60px;
+            padding-bottom: 120px;
+            padding-left: 100px;
+            transform: scale(1.04);
+            transform-origin: left center;
         }
         .hero-body-text {
             color: rgba(255,255,255,0.85);
@@ -393,22 +438,23 @@
             position: relative;
             overflow: hidden;
         }
-        .hero-cta-btn::before {
+        .hero-cta-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(var(--blue-rgb), 0.4);
+        }
+        @keyframes ctaShine {
+            0% { left: -100%; }
+            100% { left: 150%; }
+        }
+        .hero-cta-btn::after {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
-            width: 60%;
+            width: 50%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-            transition: left 0.5s ease;
-        }
-        .hero-cta-btn:hover::before {
-            left: 120%;
-        }
-        .hero-cta-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 24px rgba(var(--blue-rgb), 0.4);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+            animation: ctaShine 2s ease-in-out 0.8s 1 forwards;
         }
         .hero-right {
             display: flex;
@@ -419,6 +465,8 @@
             width: 100%;
             height: auto;
             display: block;
+            transform: scale(1.04);
+            transform-origin: bottom center;
         }
 
         /* ─── PORTFOLIO MARQUEE ─── */
@@ -426,6 +474,25 @@
             padding: 32px 0;
             overflow: hidden;
             background: var(--white);
+            position: relative;
+        }
+        .marquee-section::before,
+        .marquee-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 120px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .marquee-section::before {
+            left: 0;
+            background: linear-gradient(to right, var(--white), transparent);
+        }
+        .marquee-section::after {
+            right: 0;
+            background: linear-gradient(to left, var(--white), transparent);
         }
         .marquee-track {
             display: flex;
@@ -435,63 +502,22 @@
         }
         .marquee-track:hover { animation-play-state: paused; }
         .marquee-item {
-            width: 280px;
-            height: 360px;
+            width: 260px;
+            height: 146px;
             border-radius: 8px;
             flex-shrink: 0;
             overflow: hidden;
         }
-        .marquee-item:nth-child(16n+1), .marquee-item:nth-child(16n+9) {
-            background: linear-gradient(145deg, #1a1a2e, #16213e);
-        }
-        .marquee-item:nth-child(16n+2), .marquee-item:nth-child(16n+10) {
-            background: linear-gradient(145deg, #f0f0f3, #e8e8eb);
-        }
-        .marquee-item:nth-child(16n+3), .marquee-item:nth-child(16n+11) {
-            background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
-        }
-        .marquee-item:nth-child(16n+4), .marquee-item:nth-child(16n+12) {
-            background: linear-gradient(145deg, #f5f0eb, #ede5dc);
-        }
-        .marquee-item:nth-child(16n+5), .marquee-item:nth-child(16n+13) {
-            background: linear-gradient(145deg, #e8edf2, #dde3ea);
-        }
-        .marquee-item:nth-child(16n+6), .marquee-item:nth-child(16n+14) {
-            background: linear-gradient(145deg, #1e1e2e, #2a2a3e);
-        }
-        .marquee-item:nth-child(16n+7), .marquee-item:nth-child(16n+15) {
-            background: linear-gradient(145deg, #faf9f6, #f0ede8);
-        }
-        .marquee-item:nth-child(16n+8), .marquee-item:nth-child(16n+16) {
-            background: linear-gradient(145deg, #222236, #181828);
-        }
-
-        /* subtle inner elements for marquee items to look like websites */
-        .marquee-item::before {
-            content: '';
+        .marquee-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: block;
-            margin: 20px 16px 12px;
-            height: 8px;
-            width: 40%;
-            border-radius: 4px;
-            opacity: 0.15;
         }
-        .marquee-item:nth-child(odd)::before { background: #fff; }
-        .marquee-item:nth-child(even)::before { background: #333; }
-        .marquee-item::after {
-            content: '';
-            display: block;
-            margin: 0 16px;
-            height: 60%;
-            border-radius: 6px;
-            opacity: 0.07;
-        }
-        .marquee-item:nth-child(odd)::after { background: #fff; }
-        .marquee-item:nth-child(even)::after { background: #333; }
 
         @keyframes marqueeScroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-280px * 8 - 20px * 8)); }
+            100% { transform: translateX(calc(-260px * 7 - 20px * 7)); }
         }
 
         /* ─── PROBLEM SECTION ─── */
@@ -1299,6 +1325,8 @@
                 z-index: 3;
                 display: flex;
                 flex-direction: column;
+                transform: none;
+                animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
             }
             .hero-body-text {
                 order: 0;
@@ -1355,14 +1383,27 @@
                 height: 46vh;
                 width: auto;
                 z-index: 0;
+                animation: none;
             }
             .hero-right img {
                 height: 100%;
                 width: auto;
                 max-width: none;
+                transform: none;
             }
             .hero-bg::after {
                 z-index: 1;
+            }
+            .hero::after {
+                content: '';
+                position: absolute;
+                top: calc(50vh * 0.4);
+                left: 0;
+                right: 0;
+                height: calc(50vh * 0.6);
+                background: linear-gradient(180deg, transparent 0%, var(--white) 100%);
+                z-index: 1;
+                pointer-events: none;
             }
             .problem-section,
             .benefits-section,
@@ -1389,7 +1430,7 @@
             }
             .footer-grid { grid-template-columns: 1fr; }
             .service-checks { grid-template-columns: 1fr; }
-            .marquee-item { width: 220px; height: 280px; }
+            .marquee-item { width: 200px; height: 112px; }
         }
     </style>
 </head>
@@ -1449,7 +1490,7 @@ anfrageseite<span class="dot">.</span>io
                         </div>
                         <div class="hero-check">
                             <div class="hero-check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                            <span><strong>Echte Kundennähe:</strong> Als lokaler Partner vor Ort verstehe ich deinen Markt und bin persönlich für dich da.</span>
+                            <span><strong>Kundennähe:</strong> Als lokaler Partner vor Ort verstehe ich deinen Markt und bin persönlich für dich da.</span>
                         </div>
                     </div>
                     <a href="eintrageformular.html" class="hero-cta-btn">Kostenloses Erstgespräch sichern</a>
@@ -1466,7 +1507,7 @@ anfrageseite<span class="dot">.</span>io
                     </div>
                 </div>
                 <div class="hero-right">
-                    <img src="images/roland.webp" alt="Roland Kudor" loading="eager">
+                    <img src="images/roland2.webp" alt="Roland Kudor" loading="eager">
                 </div>
             </div>
         </div>
@@ -1475,22 +1516,21 @@ anfrageseite<span class="dot">.</span>io
     <!-- PORTFOLIO MARQUEE -->
     <section class="marquee-section">
         <div class="marquee-track">
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
-            <div class="marquee-item"></div>
+            <div class="marquee-item"><img src="images/bild-1.webp" alt="Referenzprojekt 1" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-2.webp" alt="Referenzprojekt 2" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-3.webp" alt="Referenzprojekt 3" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-5.webp" alt="Referenzprojekt 5" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-6.webp" alt="Referenzprojekt 6" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-7.webp" alt="Referenzprojekt 7" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-8.webp" alt="Referenzprojekt 8" loading="lazy"></div>
+            <!-- Duplikat für nahtlose Schleife -->
+            <div class="marquee-item"><img src="images/bild-1.webp" alt="Referenzprojekt 1" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-2.webp" alt="Referenzprojekt 2" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-3.webp" alt="Referenzprojekt 3" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-5.webp" alt="Referenzprojekt 5" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-6.webp" alt="Referenzprojekt 6" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-7.webp" alt="Referenzprojekt 7" loading="lazy"></div>
+            <div class="marquee-item"><img src="images/bild-8.webp" alt="Referenzprojekt 8" loading="lazy"></div>
         </div>
     </section>
 
@@ -1518,7 +1558,7 @@ anfrageseite<span class="dot">.</span>io
         <div class="container">
             <div class="benefits-header reveal">
                 <span class="tag">ANFRAGESEITE.IO</span>
-                <h2 style="white-space:nowrap">Webdesign aus der Region, <span class="underline-text">für die Region.</span></h2>
+                <h2>Webdesign aus der Region, <span class="underline-text">für die Region.</span></h2>
                 <p>Ich komme aus Aalen, ich kenne die Betriebe hier und ich baue dir eine Website, die nicht nur schön anzusehen ist, sondern dafür sorgt, dass bei dir das Telefon häufiger klingelt.</p>
             </div>
             <div class="bento-grid reveal">
