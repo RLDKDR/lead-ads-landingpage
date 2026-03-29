@@ -159,8 +159,8 @@
             to { opacity: 1; transform: scale(1); }
         }
         @keyframes heroImgIn {
-            from { opacity: 0; transform: scale(1.12); }
-            to { opacity: 1; transform: scale(1.04); }
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(0.95); }
         }
         @keyframes heroBgZoom {
             from { transform: scale(1.06); }
@@ -347,7 +347,7 @@
             color: rgba(255,255,255,0.85);
             font-size: 24px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.5), 0 4px 24px rgba(0,0,0,0.3);
-            margin-bottom: 44px;
+            margin-bottom: 16px;
             font-family: var(--font-h);
         }
         .hero-content {
@@ -355,7 +355,7 @@
             grid-template-columns: 1fr 1.1fr;
             gap: 24px;
             align-items: end;
-            margin-top: 32px;
+            margin-top: 0;
         }
         .hero-left {
             text-shadow: 0 1px 6px rgba(0,0,0,0.4), 0 2px 16px rgba(0,0,0,0.2);
@@ -465,7 +465,7 @@
             width: 100%;
             height: auto;
             display: block;
-            transform: scale(1.04);
+            transform: scale(0.95);
             transform-origin: bottom center;
         }
 
@@ -1311,7 +1311,7 @@
             }
             .hero-subtitle {
                 font-size: 17px;
-                color: #555;
+                color: var(--dark);
                 text-shadow: none;
                 position: relative;
                 z-index: 3;
@@ -1329,12 +1329,12 @@
                 animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
             }
             .hero-body-text {
-                order: 0;
+                display: none;
             }
             .hero-cta-btn {
-                order: 1;
+                order: -1;
                 margin-bottom: 24px;
-                align-self: flex-start;
+                align-self: center;
             }
             .hero-checks {
                 order: 2;
@@ -1475,10 +1475,10 @@ anfrageseite<span class="dot">.</span>io
             <div class="hero-headline">
                 <h1>Wie du mit einer neuen <span class="underline-text">hochwertigen Website</span> zum <strong>ersten Namen</strong> in deiner Region wirst</h1>
             </div>
-            <p class="hero-subtitle">... und endlich auch <strong>online</strong> Kunden gewinnst, nicht nur über drei Ecken und Empfehlungen.</p>
+            <p class="hero-subtitle">… und endlich auch <strong>online</strong> Kunden gewinnst, nicht nur über den guten Ruf im Ort.</p>
             <div class="hero-content">
                 <div class="hero-left">
-                    <p class="hero-body-text"><strong>Mach es dir einfach:</strong> Erhalte eine Website, die dich als Top-Experte zeigt, mehr Kundenanfragen generiert und dich sofort von der Konkurrenz abhebt.</p>
+                    <p class="hero-body-text"><strong>Mach's dir einfach:</strong> Hol dir eine Website, die dich als Experte zeigt, neue Kunden bringt und dich sichtbar von deinen Mitbewerbern abhebt.</p>
                     <div class="hero-checks">
                         <div class="hero-check">
                             <div class="hero-check-icon"><svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
