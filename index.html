@@ -49,8 +49,8 @@
             font-display: swap;
         }
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
-        body { font-family: 'Liberation Sans', sans-serif; font-weight: 400; font-size: 16px; line-height: 1.5; color: #1C1C1E; background: #fff; overflow-x: hidden; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: clip; }
+        body { font-family: 'Liberation Sans', sans-serif; font-weight: 400; font-size: 16px; line-height: 1.5; color: #1C1C1E; background: #fff; overflow-x: clip; }
         img { max-width: 100%; display: block; }
         a { text-decoration: none; color: inherit; }
         ul, ol { list-style: none; }
@@ -538,36 +538,27 @@
             display: grid;
             grid-template-columns: 55% 45%;
             gap: 48px;
-            align-items: start;
+            align-items: center;
         }
         .problem-laptop {
-            aspect-ratio: 4/3;
             border-radius: 12px;
-            background: linear-gradient(135deg, #e8e8e8 0%, #d4d4d4 40%, #e0dcd4 100%);
-            box-shadow: 0 8px 40px rgba(0,0,0,0.08);
-            position: relative;
             overflow: hidden;
         }
-        .problem-laptop::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 28px;
-            background: linear-gradient(180deg, #f5f5f5, #eee);
-            border-radius: 12px 12px 0 0;
+        .problem-laptop img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: blur(8px);
+            opacity: 0;
+            transform: scale(1.04);
+            transition: filter 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.8s ease,
+                        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .problem-laptop::after {
-            content: '';
-            position: absolute;
-            top: 7px;
-            left: 14px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ddd;
-            box-shadow: 14px 0 0 #ddd, 28px 0 0 #ddd;
+        .problem-laptop img.sharp {
+            filter: blur(0);
+            opacity: 1;
+            transform: scale(1);
         }
         .problem-text h4 {
             font-size: 20px;
@@ -588,6 +579,17 @@
         .benefits-section {
             padding: 96px 0;
             background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        .benefits-section::before {
+            content: '';
+            position: absolute;
+            inset: -80px 0;
+            background: url('images/aalen-backdrop.webp') center center / cover no-repeat;
+            opacity: 0.06;
+            transform: translateY(var(--parallax-y, 0));
+            will-change: transform;
         }
         .benefits-header {
             text-align: center;
@@ -595,8 +597,9 @@
         }
         .benefits-header h2 {
             font-size: clamp(28px, 3.2vw, 40px);
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto 16px;
+            white-space: nowrap;
         }
         .benefits-header p {
             color: #666;
@@ -622,40 +625,45 @@
             flex-direction: column;
         }
         .bento-tall-img {
-            flex: 1;
-            background: #E8EAED;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 14px;
-            min-height: 200px;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+        }
+        .bento-tall-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .bento-tall-text {
             padding: 28px;
         }
-        .bento-tall-text h3 { font-size: 22px; margin-bottom: 12px; }
+        .bento-tall-text h3 { font-size: 26px; margin-bottom: 12px; }
         .bento-tall-text p { color: #555; font-size: 15px; line-height: 1.65; }
         .bento-horizontal {
             background: var(--light);
             border-radius: 16px;
-            padding: 28px;
             display: grid;
-            grid-template-columns: 55% 45%;
-            gap: 20px;
-            align-items: center;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            align-items: stretch;
+            overflow: hidden;
         }
-        .bento-horizontal-text h3 { font-size: 20px; margin-bottom: 12px; }
+        .bento-horizontal-text {
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .bento-horizontal-text h3 { font-size: 24px; margin-bottom: 12px; }
         .bento-horizontal-text p { color: #555; font-size: 14px; line-height: 1.65; }
         .bento-horizontal-img {
-            background: #E8EAED;
-            border-radius: 12px;
-            aspect-ratio: 4/3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 14px;
+            overflow: hidden;
+        }
+        .bento-horizontal-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .benefits-cta {
             text-align: center;
@@ -667,14 +675,15 @@
             background: var(--white);
         }
         .services-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
             gap: 56px;
+            align-items: flex-start;
         }
         .services-sidebar {
             position: sticky;
             top: 100px;
-            align-self: start;
+            flex: 0 0 40%;
+            align-self: flex-start;
         }
         .services-sidebar h2 {
             font-size: clamp(28px, 3.2vw, 40px);
@@ -691,10 +700,26 @@
             flex-direction: column;
             gap: 28px;
         }
+        .services-cards {
+            flex: 1;
+        }
         .service-card {
             background: var(--light);
             border-radius: var(--radius-card);
             padding: 28px;
+        }
+        .card-pop {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            filter: blur(2px);
+            transition: opacity 600ms cubic-bezier(.2,.8,.2,1),
+                        transform 600ms cubic-bezier(.2,.8,.2,1),
+                        filter 600ms cubic-bezier(.2,.8,.2,1);
+        }
+        .card-pop.popped {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
         }
         .service-card-img {
             aspect-ratio: 16/10;
@@ -837,14 +862,27 @@
             top: 0;
             bottom: 0;
             width: 2px;
+            background: rgba(0,77,245,0.15);
+            transform: translateX(-50%);
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: var(--progress, 0%);
             background: var(--blue);
             transform: translateX(-50%);
+            transition: height 0.1s linear;
+            z-index: 1;
         }
         .timeline-item {
             display: flex;
             align-items: flex-start;
             margin-bottom: 48px;
             position: relative;
+            z-index: 2;
         }
         .timeline-item:last-child { margin-bottom: 0; }
         .timeline-item:nth-child(odd) {
@@ -1259,10 +1297,11 @@
             .mobile-nav-overlay { display: flex; }
             .hero-content { grid-template-columns: 1fr; }
             .problem-grid { grid-template-columns: 1fr; }
+            .benefits-header h2 { white-space: normal; }
             .bento-grid { grid-template-columns: 1fr; }
             .bento-tall { grid-row: auto; }
-            .services-grid { grid-template-columns: 1fr; }
-            .services-sidebar { position: static; margin-bottom: 32px; }
+            .services-grid { flex-direction: column; }
+            .services-sidebar { position: static; flex: none; width: 100%; margin-bottom: 32px; }
             .about-person-placeholder { display: none; }
             .about-overlay { margin: 0 auto; padding: 36px 24px; }
             .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -1420,6 +1459,7 @@
             .bento-horizontal { grid-template-columns: 1fr; }
             .steps-grid { grid-template-columns: 1fr; }
             .timeline::before { left: 20px; }
+            .timeline::after { left: 20px; }
             .timeline-item:nth-child(odd),
             .timeline-item:nth-child(even) {
                 padding-left: 60px;
@@ -1543,7 +1583,9 @@ anfrageseite<span class="dot">.</span>io
                 <h2>Zeigt deine <span class="underline-text">Website</span> das, was deine Kunden über dich sagen würden?</h2>
             </div>
             <div class="problem-grid">
-                <div class="problem-laptop reveal"></div>
+                <div class="problem-laptop reveal">
+                    <img src="images/erster-eindruck.webp" alt="Der erste Eindruck zählt" loading="lazy">
+                </div>
                 <div class="problem-text reveal">
                     <p>Du schaust dir die Websites deiner Konkurrenz an und alles wirkt irgendwie professionell, modern und durchdacht. Dann öffnest du deine eigene Seite und das Gefühl kennst du: <strong>Die kommt da einfach nicht mehr mit.</strong> Die wirkt daneben fast ein bisschen altbacken und zeigt von deiner echten Kompetenz so gut wie gar nichts.</p>
                     <p>Und genau hier liegt das Problem, das ich bei meinen Kunden immer wieder sehe. <strong>Sie haben ein Angebot, das besser ist als das der meisten Mitbewerber.</strong> Ihre Kunden lieben sie, ihre Arbeit spricht für sich. Aber online merkt davon kein Mensch etwas, weil die Website das einfach nicht hergibt.</p>
@@ -1564,7 +1606,7 @@ anfrageseite<span class="dot">.</span>io
             </div>
             <div class="bento-grid reveal">
                 <div class="bento-tall">
-                    <div class="bento-tall-img">Bild</div>
+                    <div class="bento-tall-img"><img src="images/anfragen.webp" alt="Mehr Kundenanfragen" loading="lazy"></div>
                     <div class="bento-tall-text">
                         <h3>Mehr qualifizierte Kundenanfragen</h3>
                         <p>Im Moment lebt dein Geschäft wahrscheinlich von Empfehlungen und Mundpropaganda. Das funktioniert, aber es hat eine Obergrenze. Deine neue Website holt dir die Leute, die dich noch nicht kennen, aber genau das suchen, was du anbietest.</p>
@@ -1575,14 +1617,14 @@ anfrageseite<span class="dot">.</span>io
                         <h3>Die passenden Mitarbeiter für dein Team</h3>
                         <p>In Zeiten, in denen jeder über Fachkräftemangel klagt, vergessen die meisten, dass gute Bewerber sich ihren Arbeitgeber aussuchen. Die schauen sich deine Website an und entscheiden in Sekunden, ob du ein Betrieb bist, in dem sie gerne arbeiten wollen.</p>
                     </div>
-                    <div class="bento-horizontal-img">Bild</div>
+                    <div class="bento-horizontal-img"><img src="images/mitarbeiter.webp" alt="Mitarbeiter gewinnen" loading="lazy"></div>
                 </div>
                 <div class="bento-horizontal">
                     <div class="bento-horizontal-text">
                         <h3>Die Nummer 1 im Raum Aalen werden</h3>
                         <p>Es gibt in jeder Branche diesen einen Betrieb, den alle kennen. Nicht weil er der größte ist, sondern weil er überall auftaucht und überall professionell wirkt. Genau das baue ich dir auf.</p>
                     </div>
-                    <div class="bento-horizontal-img">Bild</div>
+                    <div class="bento-horizontal-img"><img src="images/nummer1.webp" alt="Nummer 1 werden" loading="lazy"></div>
                 </div>
             </div>
             <div class="benefits-cta reveal">
@@ -1601,7 +1643,7 @@ anfrageseite<span class="dot">.</span>io
                     <a href="eintrageformular.html" class="btn-primary">Jetzt kostenloses Erstgespräch sichern</a>
                 </div>
                 <div class="services-cards">
-                    <div class="service-card reveal">
+                    <div class="service-card card-pop">
                         <div class="service-card-img"></div>
                         <h3>Professionelle Website</h3>
                         <p>Deine neue Seite sieht auf dem Handy genauso gut aus wie am Rechner, lädt schnell, wird bei Google gefunden und läuft technisch so sauber, dass du nie wieder einen Gedanken daran verschwenden musst. Ich kümmere mich auch nach dem Launch um alles, was anfällt. Du hast ein Geschäft zu führen, ich halte deine Website am Laufen.</p>
@@ -1624,7 +1666,7 @@ anfrageseite<span class="dot">.</span>io
                             </div>
                         </div>
                     </div>
-                    <div class="service-card reveal">
+                    <div class="service-card card-pop">
                         <div class="service-card-img"></div>
                         <h3>Branding, Foto & Video</h3>
                         <p>Heute fällt die Entscheidung über dich in wenigen Sekunden. Und die basiert nicht auf deinen Texten, sondern auf dem Gefühl, das dein Auftritt in den ersten Momenten auslöst. Sieht das hier hochwertig aus? Wirkt das professionell? Vertraue ich dem? Ich entwickle dir ein Erscheinungsbild, das alle drei Fragen mit Ja beantwortet, bevor dein Besucher eine einzige Zeile gelesen hat.</p>
@@ -1647,7 +1689,7 @@ anfrageseite<span class="dot">.</span>io
                             </div>
                         </div>
                     </div>
-                    <div class="service-card reveal">
+                    <div class="service-card card-pop">
                         <div class="service-card-img"></div>
                         <h3>Verkaufsstarke Texte</h3>
                         <p>Ich schreibe dir Texte, die den Nutzen deines Angebots so klar auf den Punkt bringen, dass dein Besucher gar nicht anders kann, als sich intensiv mit dir zu beschäftigen und dir schlussendlich eine Anfrage zu stellen. Das ist der Unterschied zwischen einer Seite, die gut aussieht, und einer Seite, die Geld verdient.</p>
@@ -1964,6 +2006,62 @@ anfrageseite<span class="dot">.</span>io
                 }
             });
         });
+
+
+        // Benefits section parallax backdrop
+        (() => {
+            var section = document.querySelector('.benefits-section');
+            if (!section) return;
+            var bg = section.querySelector(':before') || section;
+            window.addEventListener('scroll', function() {
+                var rect = section.getBoundingClientRect();
+                var speed = 0.3;
+                var yOffset = rect.top * speed;
+                section.style.setProperty('--parallax-y', yOffset + 'px');
+            }, { passive: true });
+        })();
+
+        // Problem laptop blur-to-sharp
+        (() => {
+            var img = document.querySelector('.problem-laptop img');
+            if (!img) return;
+            var io = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting) {
+                    img.classList.add('sharp');
+                    io.disconnect();
+                }
+            }, { threshold: 0.3 });
+            io.observe(img);
+        })();
+
+        // Card pop animation
+        document.querySelectorAll('.card-pop').forEach(function(card) {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('popped');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3, rootMargin: '0px 0px -80px 0px' });
+            observer.observe(card);
+        });
+
+        // Timeline progress bar
+        (() => {
+            const timeline = document.querySelector('.timeline');
+            if (!timeline) return;
+            const update = () => {
+                const rect = timeline.getBoundingClientRect();
+                const timelineTop = rect.top + window.scrollY;
+                const timelineHeight = rect.height;
+                const scrollPos = window.scrollY + window.innerHeight * 0.5;
+                const progress = Math.min(Math.max((scrollPos - timelineTop) / timelineHeight, 0), 1);
+                timeline.style.setProperty('--progress', (progress * 100) + '%');
+            };
+            window.addEventListener('scroll', update, { passive: true });
+            update();
+        })();
 
         // Scroll reveal
         const revealObserver = new IntersectionObserver((entries) => {
