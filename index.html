@@ -106,33 +106,50 @@
             justify-content: center;
             height: 48px;
             padding: 6px 28px;
-            background: linear-gradient(135deg, #003ECF 0%, #2D6AFF 100%);
+            background: linear-gradient(135deg, rgba(0,62,207,0.85) 0%, rgba(45,106,255,0.85) 100%);
             color: var(--white);
             font-family: var(--font-h);
             font-size: 14px;
             font-weight: 600;
-            border-radius: var(--radius-btn);
-            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 10px;
             white-space: nowrap;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow:
+                0 0 6px rgba(0,0,0,0.03),
+                0 2px 8px rgba(0,77,245,0.2),
+                inset 1px 1px 1px -0.5px rgba(255,255,255,0.35),
+                inset -1px -1px 1px -0.5px rgba(255,255,255,0.15),
+                inset 0 0 6px 2px rgba(255,255,255,0.08),
+                0 0 16px rgba(0,77,245,0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow:
+                0 0 8px rgba(0,0,0,0.03),
+                0 4px 16px rgba(0,77,245,0.3),
+                inset 1px 1px 1px -0.5px rgba(255,255,255,0.4),
+                inset -1px -1px 1px -0.5px rgba(255,255,255,0.2),
+                inset 0 0 8px 3px rgba(255,255,255,0.1),
+                0 0 24px rgba(0,77,245,0.18);
+        }
+        .btn-primary:active {
+            transform: translateY(1px) scale(0.98);
         }
         .btn-primary::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-            transition: left 0.5s ease;
-        }
-        .btn-primary:hover::before {
-            left: 120%;
-        }
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 20px rgba(var(--blue-rgb), 0.35);
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%);
+            border-radius: 10px 10px 0 0;
+            pointer-events: none;
         }
 
         .reveal {
@@ -187,13 +204,12 @@
 
         /* ─── HEADER ─── */
         .header {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
             height: 72px;
-            transition: background 0.35s, box-shadow 0.35s;
         }
         .header::after {
             content: '';
@@ -241,15 +257,7 @@
             opacity: 0.9;
         }
         .header-nav a:hover { opacity: 1; }
-        .header-cta .btn-primary { font-size: 13px; height: 42px; padding: 6px 20px; }
-        .header.scrolled {
-            background: rgba(255,255,255,0.97);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 1px 8px rgba(0,0,0,0.06);
-        }
-        .header.scrolled .header-logo { color: var(--dark); }
-        .header.scrolled .header-logo svg path { fill: var(--dark); }
-        .header.scrolled .header-nav a { color: var(--dark); }
+        .header-cta .btn-primary { font-size: 13px; height: 42px; padding: 6px 20px; border-radius: var(--radius-btn); }
 
         .mobile-toggle {
             display: none;
@@ -267,7 +275,6 @@
             border-radius: 2px;
             transition: transform 0.3s, opacity 0.3s, background 0.35s;
         }
-        .header.scrolled .mobile-toggle span { background: var(--dark); }
         .mobile-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .mobile-toggle.active span:nth-child(2) { opacity: 0; }
         .mobile-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -429,19 +436,49 @@
             align-items: center;
             height: 52px;
             padding: 6px 32px;
-            background: linear-gradient(135deg, #003ECF 0%, #2D6AFF 100%);
+            background: linear-gradient(135deg, rgba(0,62,207,0.85) 0%, rgba(45,106,255,0.85) 100%);
             color: var(--white);
             font-family: var(--font-h);
             font-size: 15px;
             font-weight: 600;
-            border-radius: var(--radius-btn);
-            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 10px;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow:
+                0 0 6px rgba(0,0,0,0.03),
+                0 2px 8px rgba(0,77,245,0.25),
+                inset 1px 1px 1px -0.5px rgba(255,255,255,0.35),
+                inset -1px -1px 1px -0.5px rgba(255,255,255,0.15),
+                inset 0 0 6px 2px rgba(255,255,255,0.08),
+                0 0 16px rgba(0,77,245,0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
         }
         .hero-cta-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 24px rgba(var(--blue-rgb), 0.4);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow:
+                0 0 8px rgba(0,0,0,0.03),
+                0 4px 16px rgba(0,77,245,0.35),
+                inset 1px 1px 1px -0.5px rgba(255,255,255,0.4),
+                inset -1px -1px 1px -0.5px rgba(255,255,255,0.2),
+                inset 0 0 8px 3px rgba(255,255,255,0.1),
+                0 0 24px rgba(0,77,245,0.2);
+        }
+        .hero-cta-btn:active {
+            transform: translateY(1px) scale(0.98);
+        }
+        .hero-cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%);
+            border-radius: 10px 10px 0 0;
+            pointer-events: none;
         }
         @keyframes ctaShine {
             0% { left: -100%; }
@@ -540,25 +577,87 @@
             gap: 48px;
             align-items: center;
         }
-        .problem-laptop {
+        /* Before/After Slider */
+        .ba-slider {
+            position: relative;
             border-radius: 12px;
             overflow: hidden;
+            cursor: default;
+            user-select: none;
+            -webkit-user-select: none;
+            line-height: 0;
         }
-        .problem-laptop img {
+        .ba-after {
+            display: block;
+            width: 100%;
+        }
+        .ba-after img, .ba-before img {
             width: 100%;
             height: auto;
             display: block;
-            filter: blur(8px);
-            opacity: 0;
-            transform: scale(1.04);
-            transition: filter 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                        opacity 0.8s ease,
-                        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: none;
         }
-        .problem-laptop img.sharp {
-            filter: blur(0);
-            opacity: 1;
-            transform: scale(1);
+        .ba-before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+        }
+        .ba-before img {
+            width: 0;
+            min-width: 0;
+            height: 100%;
+            object-fit: cover;
+            object-position: left;
+        }
+        .ba-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .ba-handle-line {
+            flex: 1;
+            width: 2px;
+            background: rgba(255,255,255,0.5);
+        }
+        .ba-handle-knob {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--dark);
+            border: 2px solid rgba(255,255,255,0.9);
+            box-shadow: 0 2px 16px rgba(0,0,0,0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            pointer-events: auto;
+            cursor: grab;
+            flex-shrink: 0;
+            transition: box-shadow 0.3s, transform 0.15s;
+        }
+        .ba-handle-knob:hover {
+            box-shadow: 0 2px 20px rgba(0,0,0,0.45);
+            transform: scale(1.08);
+        }
+        .ba-handle-knob:active, .ba-slider.dragging .ba-handle-knob {
+            cursor: grabbing;
+            transform: scale(1.04);
+        }
+        .ba-handle-knob svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
         }
         .problem-text h4 {
             font-size: 20px;
@@ -623,6 +722,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
         .bento-tall-img {
             aspect-ratio: 1/1;
@@ -647,6 +747,7 @@
             gap: 0;
             align-items: stretch;
             overflow: hidden;
+            position: relative;
         }
         .bento-horizontal-text {
             padding: 28px;
@@ -707,6 +808,7 @@
             background: var(--light);
             border-radius: var(--radius-card);
             padding: 28px;
+            position: relative;
         }
         .card-pop {
             opacity: 0;
@@ -912,6 +1014,7 @@
             padding: 28px;
             box-shadow: var(--shadow-card);
             width: 100%;
+            position: relative;
         }
         .timeline-card-img {
             aspect-ratio: 16/10;
@@ -1040,6 +1143,7 @@
             background: linear-gradient(145deg, #0044CC 0%, #003AB8 100%);
             border-radius: var(--radius-card);
             padding: 32px;
+            position: relative;
         }
         .step-number {
             font-family: var(--font-h);
@@ -1066,6 +1170,7 @@
             color: rgba(255,255,255,0.9);
             font-weight: 600;
         }
+
         .steps-cta {
             text-align: center;
         }
@@ -1577,8 +1682,20 @@ anfrageseite<span class="dot">.</span>io
                 <h2>Zeigt deine <span class="underline-text">Website</span> das, was deine Kunden über dich sagen würden?</h2>
             </div>
             <div class="problem-grid">
-                <div class="problem-laptop reveal">
-                    <img src="images/erster-eindruck.webp" alt="Der erste Eindruck zählt" loading="lazy">
+                <div class="ba-slider reveal">
+                    <div class="ba-after">
+                        <img src="images/nachher.webp" alt="Nachher – professionelle Website" loading="lazy">
+                    </div>
+                    <div class="ba-before">
+                        <img src="images/vorher.webp" alt="Vorher – veraltete Website" loading="lazy">
+                    </div>
+                    <div class="ba-handle">
+                        <div class="ba-handle-line"></div>
+                        <div class="ba-handle-knob">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5L4 12L9 19"/><path d="M15 5L20 12L15 19"/></svg>
+                        </div>
+                        <div class="ba-handle-line"></div>
+                    </div>
                 </div>
                 <div class="problem-text reveal">
                     <p>Du schaust dir die Websites deiner Konkurrenz an und alles wirkt irgendwie professionell, modern und durchdacht. Dann öffnest du deine eigene Seite und das Gefühl kennst du: <strong>Die kommt da einfach nicht mehr mit.</strong> Die wirkt daneben fast ein bisschen altbacken und zeigt von deiner echten Kompetenz so gut wie gar nichts.</p>
@@ -1953,18 +2070,6 @@ anfrageseite<span class="dot">.</span>io
     </footer>
 
     <script>
-        // Header scroll effect
-        const header = document.getElementById('header');
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const y = window.scrollY;
-            if (y > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-            lastScroll = y;
-        }, { passive: true });
 
         // Mobile nav toggle
         const mobileToggle = document.getElementById('mobileToggle');
@@ -2002,30 +2107,83 @@ anfrageseite<span class="dot">.</span>io
         });
 
 
-        // Benefits section parallax backdrop
+        // Benefits section parallax backdrop (clamped to inset range)
         (() => {
             var section = document.querySelector('.benefits-section');
             if (!section) return;
-            var bg = section.querySelector(':before') || section;
+            var limit = 80;
             window.addEventListener('scroll', function() {
                 var rect = section.getBoundingClientRect();
-                var speed = 0.3;
-                var yOffset = rect.top * speed;
+                var yOffset = Math.max(-limit, Math.min(limit, rect.top * 0.3));
                 section.style.setProperty('--parallax-y', yOffset + 'px');
             }, { passive: true });
         })();
 
-        // Problem laptop blur-to-sharp
+        // Before/After Slider
         (() => {
-            var img = document.querySelector('.problem-laptop img');
-            if (!img) return;
-            var io = new IntersectionObserver(function(entries) {
-                if (entries[0].isIntersecting) {
-                    img.classList.add('sharp');
-                    io.disconnect();
+            var slider = document.querySelector('.ba-slider');
+            if (!slider) return;
+            var before = slider.querySelector('.ba-before');
+            var handle = slider.querySelector('.ba-handle');
+            var beforeImg = before.querySelector('img');
+            var afterImg = slider.querySelector('.ba-after img');
+            var dragging = false;
+
+            function setPosition(pct) {
+                pct = Math.max(0, Math.min(100, pct));
+                before.style.width = pct + '%';
+                handle.style.left = pct + '%';
+                beforeImg.style.width = (slider.offsetWidth) + 'px';
+                beforeImg.style.minWidth = (slider.offsetWidth) + 'px';
+            }
+
+            // Set initial size once after image loads
+            function initSize() {
+                beforeImg.style.width = slider.offsetWidth + 'px';
+                beforeImg.style.minWidth = slider.offsetWidth + 'px';
+            }
+            if (afterImg.complete) initSize();
+            else afterImg.addEventListener('load', initSize);
+            window.addEventListener('resize', initSize);
+
+            function getPct(clientX) {
+                var rect = slider.getBoundingClientRect();
+                return ((clientX - rect.left) / rect.width) * 100;
+            }
+
+            // Mouse
+            slider.querySelector('.ba-handle-knob').addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                dragging = true;
+                slider.classList.add('dragging');
+            });
+            window.addEventListener('mousemove', function(e) {
+                if (!dragging) return;
+                setPosition(getPct(e.clientX));
+            });
+            window.addEventListener('mouseup', function() {
+                if (dragging) {
+                    dragging = false;
+                    slider.classList.remove('dragging');
                 }
-            }, { threshold: 0.3 });
-            io.observe(img);
+            });
+
+            // Touch
+            slider.querySelector('.ba-handle-knob').addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                dragging = true;
+                slider.classList.add('dragging');
+            }, { passive: false });
+            window.addEventListener('touchmove', function(e) {
+                if (!dragging) return;
+                setPosition(getPct(e.touches[0].clientX));
+            }, { passive: true });
+            window.addEventListener('touchend', function() {
+                if (dragging) {
+                    dragging = false;
+                    slider.classList.remove('dragging');
+                }
+            });
         })();
 
         // Card pop animation
