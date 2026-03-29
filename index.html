@@ -722,19 +722,13 @@
             filter: blur(0);
         }
         .service-card-img {
-            aspect-ratio: 16/10;
             border-radius: 12px;
-            margin-bottom: 24px;
-            overflow: hidden;
+            margin-bottom: 16px;
         }
-        .service-card:nth-child(1) .service-card-img {
-            background: linear-gradient(135deg, #dce3f0 0%, #c5d0e6 40%, #e0e6f0 100%);
-        }
-        .service-card:nth-child(2) .service-card-img {
-            background: linear-gradient(135deg, #e0e8f5 0%, #c8d5eb 40%, #d5dff0 100%);
-        }
-        .service-card:nth-child(3) .service-card-img {
-            background: linear-gradient(135deg, #d8e2f0 0%, #c0cee5 40%, #dde5f2 100%);
+        .service-card-img img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
         .service-card h3 {
             font-size: 22px;
@@ -760,11 +754,11 @@
             color: var(--dark);
         }
         .service-check-icon {
-            width: 20px;
-            height: 20px;
-            min-width: 20px;
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
             background: var(--blue);
-            border-radius: 50%;
+            clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1470,7 +1464,7 @@
                 left: 20px;
             }
             .footer-grid { grid-template-columns: 1fr; }
-            .service-checks { grid-template-columns: 1fr; }
+            .service-checks { grid-template-columns: 1fr 1fr; }
             .marquee-item { width: 200px; height: 112px; }
         }
     </style>
@@ -1606,7 +1600,7 @@ anfrageseite<span class="dot">.</span>io
             </div>
             <div class="bento-grid reveal">
                 <div class="bento-tall">
-                    <div class="bento-tall-img"><img src="images/anfragen.webp" alt="Mehr Kundenanfragen" loading="lazy"></div>
+                    <div class="bento-tall-img"><img src="images/anfragen.webp" alt="Mehr qualifizierte Kundenanfragen" loading="lazy"></div>
                     <div class="bento-tall-text">
                         <h3>Mehr qualifizierte Kundenanfragen</h3>
                         <p>Im Moment lebt dein Geschäft wahrscheinlich von Empfehlungen und Mundpropaganda. Das funktioniert, aber es hat eine Obergrenze. Deine neue Website holt dir die Leute, die dich noch nicht kennen, aber genau das suchen, was du anbietest.</p>
@@ -1617,14 +1611,14 @@ anfrageseite<span class="dot">.</span>io
                         <h3>Die passenden Mitarbeiter für dein Team</h3>
                         <p>In Zeiten, in denen jeder über Fachkräftemangel klagt, vergessen die meisten, dass gute Bewerber sich ihren Arbeitgeber aussuchen. Die schauen sich deine Website an und entscheiden in Sekunden, ob du ein Betrieb bist, in dem sie gerne arbeiten wollen.</p>
                     </div>
-                    <div class="bento-horizontal-img"><img src="images/mitarbeiter.webp" alt="Mitarbeiter gewinnen" loading="lazy"></div>
+                    <div class="bento-horizontal-img"><img src="images/bewerbungen.webp" alt="Die passenden Mitarbeiter" loading="lazy"></div>
                 </div>
                 <div class="bento-horizontal">
                     <div class="bento-horizontal-text">
                         <h3>Die Nummer 1 im Raum Aalen werden</h3>
                         <p>Es gibt in jeder Branche diesen einen Betrieb, den alle kennen. Nicht weil er der größte ist, sondern weil er überall auftaucht und überall professionell wirkt. Genau das baue ich dir auf.</p>
                     </div>
-                    <div class="bento-horizontal-img"><img src="images/nummer1.webp" alt="Nummer 1 werden" loading="lazy"></div>
+                    <div class="bento-horizontal-img"><img src="images/nummer-eins.webp" alt="Nummer 1 werden" loading="lazy"></div>
                 </div>
             </div>
             <div class="benefits-cta reveal">
@@ -1644,7 +1638,7 @@ anfrageseite<span class="dot">.</span>io
                 </div>
                 <div class="services-cards">
                     <div class="service-card card-pop">
-                        <div class="service-card-img"></div>
+                        <div class="service-card-img"><img src="images/website.webp" alt="Professionelle Website" loading="lazy"></div>
                         <h3>Professionelle Website</h3>
                         <p>Deine neue Seite sieht auf dem Handy genauso gut aus wie am Rechner, lädt schnell, wird bei Google gefunden und läuft technisch so sauber, dass du nie wieder einen Gedanken daran verschwenden musst. Ich kümmere mich auch nach dem Launch um alles, was anfällt. Du hast ein Geschäft zu führen, ich halte deine Website am Laufen.</p>
                         <div class="service-checks">
@@ -1667,7 +1661,7 @@ anfrageseite<span class="dot">.</span>io
                         </div>
                     </div>
                     <div class="service-card card-pop">
-                        <div class="service-card-img"></div>
+                        <div class="service-card-img"><img src="images/branding.webp" alt="Branding, Foto & Video" loading="lazy"></div>
                         <h3>Branding, Foto & Video</h3>
                         <p>Heute fällt die Entscheidung über dich in wenigen Sekunden. Und die basiert nicht auf deinen Texten, sondern auf dem Gefühl, das dein Auftritt in den ersten Momenten auslöst. Sieht das hier hochwertig aus? Wirkt das professionell? Vertraue ich dem? Ich entwickle dir ein Erscheinungsbild, das alle drei Fragen mit Ja beantwortet, bevor dein Besucher eine einzige Zeile gelesen hat.</p>
                         <div class="service-checks">
@@ -1690,7 +1684,7 @@ anfrageseite<span class="dot">.</span>io
                         </div>
                     </div>
                     <div class="service-card card-pop">
-                        <div class="service-card-img"></div>
+                        <div class="service-card-img"><img src="images/werbetexte.webp" alt="Verkaufsstarke Texte" loading="lazy"></div>
                         <h3>Verkaufsstarke Texte</h3>
                         <p>Ich schreibe dir Texte, die den Nutzen deines Angebots so klar auf den Punkt bringen, dass dein Besucher gar nicht anders kann, als sich intensiv mit dir zu beschäftigen und dir schlussendlich eine Anfrage zu stellen. Das ist der Unterschied zwischen einer Seite, die gut aussieht, und einer Seite, die Geld verdient.</p>
                         <div class="service-checks">
